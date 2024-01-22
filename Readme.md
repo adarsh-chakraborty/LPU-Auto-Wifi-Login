@@ -20,9 +20,6 @@ This extension is an unofficial tool created for personal benefit and is not aff
 
 # How to Install
 
-### Prerequisites:
-- Make sure you have Google Chrome installed on your computer.
-
 ### Steps:
 
 1. **Clone the Git Repository:**
@@ -51,13 +48,13 @@ This extension is an unofficial tool created for personal benefit and is not aff
    - Click the "Load unpacked" button that appears after enabling Developer mode.
    - In the file dialog that opens, navigate to the directory where you cloned the Git repository and select the extension folder. Click "Select Folder."
 
-6. **Verify Installation:**
+6. **Verify Installation and Connect to LPU Network:**
    - You should see the extension listed on the extensions page with a unique ID.
-   - Additionally, the extension icon should appear in the Chrome toolbar.
+   - Connect to LPU Wifi Network.
 
 7. **Test the Extension:**
    - Navigate to the specific URL where you want the extension to run. For this extension, visit "https://internet.lpu.in/24online/webpages/client.jsp".
-   - Ensure that the extension is working as expected.
+   - Ensure that the extension is working as expected and you're connected to LPU Wifi Network.
 
 
 ## How to Disable Auto Login
