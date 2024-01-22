@@ -1,11 +1,11 @@
   {
-    "name": "LPU Wifi Auto Login",
+    "name": "LPU Auto Wifi Login",
     "description": "A Chrome extension to login into LPU Wifi automatically.",
     "homepage_url": "https://github.com/adarsh-chakraborty/LPU-Auto-Wifi-Login",
     "version": "1.0.0",
     "manifest_version": 3,
     "action": {
-      "default_title": "LPU Wifi Auto Login"
+      "default_title": "Unofficial Auto Wifi Login Extension for LPU"
     },
     "content_scripts": [
      
@@ -13,18 +13,17 @@
         "run_at" : "document_start",
         "js": ["content.js"],
         "matches": [
-          "https://*/*",
-          "http://*/*"
+          "https://internet.lpu.in/24online/webpages/client.jsp*"
         ]
       }
     ],
    
     "permissions": [
-      "activeTab"
+      "activeTab",
+      "storage"
     ],
     "host_permissions": [
-      "https://*/*",
-      "http://*/*"
+      "https://internet.lpu.in/24online/webpages/client.jsp*"
     ]
   }
   
