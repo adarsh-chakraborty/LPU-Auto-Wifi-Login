@@ -2,6 +2,16 @@
 # LPU Auto Wifi Login
 This extension saves your wifi credentials and automatically submits them for you on the wifi login page.
 
+## Overview
+
+The LPU Wifi Auto Login Chrome Extension simplifies the process of logging in to the LPU Wifi portal by automatically filling in the username and password fields.
+
+## Features
+
+- Automatic filling of username and password fields.
+- Option to disable automatic login using a query parameter.
+- Option to forget stored credentials using a query parameter.
+
 ## Disclaimer
 
 This extension is an unofficial tool created for personal benefit and is not affiliated with or endorsed by LPU. Any use of this extension is at the user's own risk, and the creators are not responsible for any consequences resulting from its use. The extension is not intended for commercial use or distribution.
@@ -26,6 +36,8 @@ This extension is an unofficial tool created for personal benefit and is not aff
 
    This command downloads the extension files from the specified Git repository.
 
+   Alternatively, You can just download the repository as zip and extract it somewhere on your computer.
+
 2. **Open Google Chrome:**
    - Open the Google Chrome browser on your computer.
 
@@ -46,6 +58,21 @@ This extension is an unofficial tool created for personal benefit and is not aff
 7. **Test the Extension:**
    - Navigate to the specific URL where you want the extension to run. For this extension, visit "https://internet.lpu.in/24online/webpages/client.jsp".
    - Ensure that the extension is working as expected.
+
+
+## How to Disable Auto Login
+
+To Temporarly disable automatic login, append the following query parameter to the URL:
+
+- **disableAutoLogin=true:** Disable automatic login. Example: `https://internet.lpu.in/24online/webpages/client.jsp?disableAutoLogin=true`
+
+Or, just remove the extension from chrome.
+
+## How to Remove Stored Credentials
+
+To remove stored credentials, append the following query parameter to the URL:
+
+- **forgetcreds=true:** Remove stored credentials. Example: `https://internet.lpu.in/24online/webpages/client.jsp?forgetcreds=true`
 
 ### Notes:
 
