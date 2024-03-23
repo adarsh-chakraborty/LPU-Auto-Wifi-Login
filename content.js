@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap';
+  document.head.appendChild(link);
+  document.body.style.fontFamily = 'Poppins, sans-serif';
   const urlParams = new URLSearchParams(window.location.search);
   const pageMatch = window.location.href.includes("internet.lpu.in/24online/webpages");
   
@@ -25,7 +30,24 @@ document.addEventListener("DOMContentLoaded", function () {
   const ums = window.location.href.includes("ums.lpu.in/lpuums/empattend.aspx");
 
   if(ums){
-    // Function to calculate working hours from 'in' and 'out' times
+    appendTotalHours();
+  }
+});
+
+function promptForCredentials() {
+  return {
+    username: prompt("(Auto Wifi Login) Enter your wifi username:"),
+    password: prompt("(Auto Wifi Login) Enter your wifi password:")
+  };
+}
+
+function performLoginAction(username, password) {
+  document.querySelector("input[name='username']").value = username;
+  document.querySelector("input[name='password']").value = password;
+  document.querySelector("#agreepolicy").click();
+  document.querySelector("#loginbtn").click();
+}
+
 function calculateWorkingHours(inTime, outTime) {
   if (inTime === 'X' || outTime === 'X') return 0; // If either in or out time is 'X', return 0
   const inDate = new Date('2000-01-01 ' + inTime); // Assuming year, month, day doesn't matter
@@ -35,7 +57,16 @@ function calculateWorkingHours(inTime, outTime) {
   return hours;
 }
 
-// Function to append total working hours to the table
+function convertHoursToHoursAndMinutes(hours) {
+  var totalMinutes = hours * 60;
+  var hoursComponent = Math.floor(totalMinutes / 60);
+  var minutesComponent = Math.round(totalMinutes % 60);
+
+  let str1 = `${hoursComponent} ${hoursComponent === 1 ? 'hour' : 'hours'} and ${minutesComponent} ${minutesComponent === 1 ? 'minute' : 'minutes'}`;
+  return str1
+}
+
+
 function appendTotalHours() {
   const table = document.getElementById('ctl00_ContentPlaceHolder1_gvAttendance');
   if (!table) return; // Table not found, exit function
@@ -66,7 +97,8 @@ function appendTotalHours() {
 
       if (sundayFound || i === table.rows.length - 1) { // If Sunday is found or end of table is reached
         currentWeek++;
-        row.insertAdjacentHTML('afterend', `<tr style="font-weight: 700; background-color: #f7d291; border: 2px solid #ff6b6b; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 10px; text-align: center; font-family: 'Poppins', sans-serif; color: #333;"><td colspan="8">Total Working Hours for Week ${currentWeek}:- ${weekTotal.toFixed(2)} Hours</td></tr>`);
+        const formatHour = convertHoursToHoursAndMinutes(weekTotal);
+        row.insertAdjacentHTML('afterend', `<tr style="font-weight: 700; background-color: #f7d291; border: 2px solid #ff6b6b; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 10px; text-align: center; font-family: 'Poppins', sans-serif; color: #333;"><td colspan="8">Total Working Hours for Week ${currentWeek}:- ${formatHour}</td></tr>`);
         weekTotal = 0; // Reset weekly total
         sundayFound = false; // Reset Sunday flag
       }
@@ -77,30 +109,4 @@ function appendTotalHours() {
 }
 
 
-  appendTotalHours();
-// Append the <link> element to the <head> of the document to load the font
-document.head.appendChild(link);
-document.body.style.fontFamily = 'Poppins, sans-serif';
-  }
-});
-
-function promptForCredentials() {
-  return {
-    username: prompt("(Auto Wifi Login) Enter your wifi username:"),
-    password: prompt("(Auto Wifi Login) Enter your wifi password:")
-  };
-}
-
-function performLoginAction(username, password) {
-  document.querySelector("input[name='username']").value = username;
-  document.querySelector("input[name='password']").value = password;
-  document.querySelector("#agreepolicy").click();
-  document.querySelector("#loginbtn").click();
-}
-
-
-
-var link = document.createElement('link');
-link.rel = 'stylesheet';
-link.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap';
 
