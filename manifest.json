@@ -13,7 +13,8 @@
         "run_at" : "document_start",
         "js": ["content.js"],
         "matches": [
-          "https://internet.lpu.in/24online/webpages/client.jsp*"
+          "https://internet.lpu.in/24online/webpages/client.jsp*",
+          "https://ums.lpu.in/lpuums/empattend.aspx*"
         ]
       }
     ],
@@ -23,7 +24,8 @@
       "storage"
     ],
     "host_permissions": [
-      "https://internet.lpu.in/24online/webpages/client.jsp*"
+      "https://internet.lpu.in/24online/webpages/client.jsp*",
+      "https://ums.lpu.in/lpuums/empattend.aspx*"
     ]
   }
   
