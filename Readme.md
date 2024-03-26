@@ -8,6 +8,7 @@ The LPU Wifi Auto Login Chrome Extension simplifies the process of logging in to
 
 ## Features
 
+- (New) Calculates Weekly Total Working Hours on UMS Page.
 - Automatic filling of username and password fields.
 - Option to disable automatic login using a query parameter.
 - Option to forget stored credentials using a query parameter.
