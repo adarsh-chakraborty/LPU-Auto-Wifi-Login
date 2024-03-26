@@ -97,7 +97,7 @@ function appendTotalHours() {
     const outTime = row.cells[3].textContent.trim(); 
     
     if (status && inTime && outTime) {
-      if (status === 'Working Day') {
+      if (inTime !== 'X') {
         const hoursWorked = calculateWorkingHours(inTime, outTime); 
         weekTotal += hoursWorked; 
       }
