@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var link = document.createElement('link');
+  let link = document.createElement('link');
   link.rel = 'stylesheet';
   link.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap';
   document.head.appendChild(link);
@@ -49,18 +49,30 @@ function performLoginAction(username, password) {
 }
 
 function calculateWorkingHours(inTime, outTime) {
-  if (inTime === 'X' || outTime === 'X') return 0; // If either in or out time is 'X', return 0
-  const inDate = new Date('2000-01-01 ' + inTime); // Assuming year, month, day doesn't matter
-  const outDate = new Date('2000-01-01 ' + outTime); // Assuming year, month, day doesn't matter
-  const diff = outDate - inDate; // Difference in milliseconds
-  const hours = diff / (1000 * 60 * 60); // Convert milliseconds to hours
+  if (inTime === 'X') return 0;
+  const inDate = new Date('2000-01-01 ' + inTime);
+  let outDate;
+  
+  if (outTime === 'X') {
+    outDate = new Date('2000-01-01 17:00');
+  } else {
+    outDate = new Date('2000-01-01 ' + outTime);
+  }
+
+  // Working hours starts at 9AM
+  if (inDate.getHours() < 9) {
+    inDate.setHours(9, 0, 0); 
+  }
+
+  const diff = outDate - inDate; 
+  const hours = diff / (1000 * 60 * 60); 
   return hours;
 }
 
 function convertHoursToHoursAndMinutes(hours) {
-  var totalMinutes = hours * 60;
-  var hoursComponent = Math.floor(totalMinutes / 60);
-  var minutesComponent = Math.round(totalMinutes % 60);
+  let totalMinutes = hours * 60;
+  let hoursComponent = Math.floor(totalMinutes / 60);
+  let minutesComponent = Math.round(totalMinutes % 60);
 
   let str1 = `${hoursComponent} ${hoursComponent === 1 ? 'hour' : 'hours'} and ${minutesComponent} ${minutesComponent === 1 ? 'minute' : 'minutes'}`;
   return str1
@@ -76,31 +88,30 @@ function appendTotalHours() {
   let sundayFound = false;
 
   // Iterate through rows
-  for (let i = 1; i < table.rows.length; i++) { // Start from index 1 to skip header row
+  for (let i = 1; i < table.rows.length; i++) { 
     const row = table.rows[i];
-    if (!row || row.cells.length < 4) continue; // Skip if row or cells are undefined
+    if (!row || row.cells.length < 4) continue; 
 
-    const status = row.cells[1].textContent.trim(); // Get status of the day
-    const inTime = row.cells[2].textContent.trim(); // Get 'in' time
-    const outTime = row.cells[3].textContent.trim(); // Get 'out' time
-
-    // Check if all necessary data is available
+    const status = row.cells[1].textContent.trim(); 
+    const inTime = row.cells[2].textContent.trim(); 
+    const outTime = row.cells[3].textContent.trim(); 
+    
     if (status && inTime && outTime) {
       if (status === 'Working Day') {
-        const hoursWorked = calculateWorkingHours(inTime, outTime); // Calculate working hours
-        weekTotal += hoursWorked; // Add to weekly total
+        const hoursWorked = calculateWorkingHours(inTime, outTime); 
+        weekTotal += hoursWorked; 
       }
 
       if (status === 'Sunday') {
         sundayFound = true;
       }
 
-      if (sundayFound || i === table.rows.length - 1) { // If Sunday is found or end of table is reached
+      if (sundayFound || i === table.rows.length - 1) { 
         currentWeek++;
         const formatHour = convertHoursToHoursAndMinutes(weekTotal);
         row.insertAdjacentHTML('afterend', `<tr style="font-weight: 700; background-color: #f7d291; border: 2px solid #ff6b6b; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 10px; text-align: center; font-family: 'Poppins', sans-serif; color: #333;"><td colspan="8">Total Working Hours for Week ${currentWeek}:- ${formatHour}</td></tr>`);
-        weekTotal = 0; // Reset weekly total
-        sundayFound = false; // Reset Sunday flag
+        weekTotal = 0; 
+        sundayFound = false; 
       }
     } else {
       console.error(`Missing data in row ${i}`);
